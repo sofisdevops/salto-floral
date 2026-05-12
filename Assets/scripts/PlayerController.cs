@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D rb;
     private bool isGrounded;
 
-    // 1. DECLARA LA VARIABLE (en minúsculas para diferenciarla de la clase)
     private GameManager gameManager; 
     private Animator animator;
 
@@ -15,7 +14,6 @@ public class PlayerController : MonoBehaviour
     public Sprite spriteNormal; 
     public Sprite spriteIzquierda;
 
-    // Referencia al componente que dibuja la imagen
     private SpriteRenderer spriteRenderer;
 
     public Sprite spriteSalto;
@@ -31,8 +29,7 @@ public class PlayerController : MonoBehaviour
         if(spriteRenderer != null && spriteNormal != null){
             spriteRenderer.sprite = spriteNormal;
         }
-        
-        // 2. ASIGNA LA INSTANCIA A TU VARIABLE
+
         gameManager = Object.FindFirstObjectByType<GameManager>();
     }
 
@@ -58,27 +55,23 @@ public class PlayerController : MonoBehaviour
     {
         if (isGrounded)
         {
-            // SI ESTÁ EN EL SUELO: Cambia entre normal e izquierda
             if (moveInput < 0) spriteRenderer.sprite = spriteIzquierda;
             else if (moveInput > 0) spriteRenderer.sprite = spriteNormal;
-            // Si moveInput es 0, mantiene el último sprite puesto
         }
         else
         {
-            // SI ESTÁ EN EL AIRE:
             if (rb.linearVelocity.y > 0.1f) 
             {
-                spriteRenderer.sprite = spriteSalto; // Está subiendo
+                spriteRenderer.sprite = spriteSalto;
             }
             else if (rb.linearVelocity.y < -0.1f) 
             {
-                spriteRenderer.sprite = spriteCaida; // Está bajando
+                spriteRenderer.sprite = spriteCaida;
             }
         }
 
-        // Opcional: Voltear el sprite si quieres usar la misma pose de salto para ambos lados
-        if (moveInput < 0) spriteRenderer.flipX = false; 
-        else if (moveInput > 0) spriteRenderer.flipX = false; 
+        if (moveInput < 0) spriteRenderer.flipX = true; 
+        else if (moveInput > 0) spriteRenderer.flipX = true; 
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -90,7 +83,6 @@ public class PlayerController : MonoBehaviour
         
         if (collision.gameObject.CompareTag("nuez"))
         {
-            // 3. USA LA VARIABLE (en minúsculas)
             if (gameManager != null)
             {
                 gameManager.ShowGameOver();

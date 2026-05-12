@@ -19,18 +19,16 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        // Al empezar, asegúrate de que el tiempo corra y el panel esté oculto
         Time.timeScale = 1f;
         if(gameOverPanel != null) gameOverPanel.SetActive(false);
         UpdateUI();
     }
     
-    void Update() // "U" mayúscula
+    void Update()
     {
         if(!isGameOver)
         {
-            timer += Time.deltaTime; // Corregido "deltaTime"
-            // Opcional: Actualizar un texto de tiempo en pantalla si tienes uno
+            timer += Time.deltaTime;
         }    
     }
 
@@ -43,7 +41,7 @@ public class GameManager : MonoBehaviour
     public void ShowGameOver()
     {
         isGameOver = true;
-        gameOverPanel.SetActive(true); // Corregido a "gameOverPanel"
+        gameOverPanel.SetActive(true); 
         
         finalScoreText.text = "Score Total: " + totalScore.ToString();
         finalTimeText.text = "Tiempo: " + Mathf.FloorToInt(timer).ToString() + "s";
@@ -62,12 +60,11 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // Opcional: Podrías reiniciar la posición del jugador aquí 
+            // Opcional:  reiniciar la posición del jugador aquí 
             // en lugar de recargar toda la escena.
         }
     }
 
-    // Esta función es para el BOTÓN de la interfaz
     public void RestartGameButton()
     {
         Time.timeScale = 1f;
